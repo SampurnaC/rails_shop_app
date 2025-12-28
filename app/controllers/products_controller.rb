@@ -1,11 +1,13 @@
 class ProductsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_product, only: %i[show, edit, update, destroy]
+  before_action :set_product, only: %i[show edit update destroy]
   def index
     @products=Product.all
   end
 
+  def show
+  end
   def new
     @product=current_user.products.build
   end
@@ -21,7 +23,6 @@ class ProductsController < ApplicationController
 
   def edit
   end
-
 
   def update
     if @product.update(product_params)
@@ -40,6 +41,7 @@ class ProductsController < ApplicationController
   private
   
   def set_product
+    binding.pry
     @product=Product.find(params[:id])
   end
   def product_params
