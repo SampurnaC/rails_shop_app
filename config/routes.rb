@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :products
   root "products#index"
 
-  resources :admin do
-    resources :category
+  namespace :admin do
+    resources :categories
   end
 end
