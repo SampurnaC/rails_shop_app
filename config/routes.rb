@@ -3,8 +3,12 @@ Rails.application.routes.draw do
   
   get "up" => "rails/health#show", as: :rails_health_check
   
-  resources :products
+  resources :products, only: [:index, :show]
   root "products#index"
+
+  namespace :dashboard do
+    resources :products
+  end
 
   namespace :admin do
     resources :categories
