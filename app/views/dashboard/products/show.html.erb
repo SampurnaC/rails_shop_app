@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-7">
+      <h2 class="fw-bold"><%= @product.title %></h2>
+      <p class="text-muted mb-2">
+        Category:
+        <span class="badge bg-secondary">
+          <%= @product.category&.name %>
+        </span>
+      </p>
+      <h3 class="text-primary mb-3">
+        £<%= number_with_precision(@product.price, precision: 2) %>
+      </h3>
+      <p class="mb-4">
+        <%= simple_format(@product.description) %>
+      </p>
+      <div class="d-flex gap-2">
+        <%= link_to "Add to Cart",
+              "#",
+              class: "btn btn-warning btn-lg flex-grow-1" %>
+        <%= link_to "Edit",
+              edit_dashboard_product_path(@product),
+              class: "btn btn-outline-secondary" %>
+        <%= link_to "Delete",
+              dashboard_product_path(@product),
+              data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+              class: "btn btn-outline-danger" %>
+      </div>
+    </div>
+  </div>
+  <hr class="my-5">
+
+  <div class="row text-muted small">
+    <div class="col-md-4">
+      <strong>Created:</strong><br>
+      <%= @product.created_at.strftime("%d %b %Y") %>
+    </div>
+    <div class="col-md-4">
+      <strong>Last Updated:</strong><br>
+      <%= @product.updated_at.strftime("%d %b %Y") %>
+    </div>
+    <div class="col-md-4">
+      <strong>Product ID:</strong><br>
+    </div>
+  </div>
+</div>

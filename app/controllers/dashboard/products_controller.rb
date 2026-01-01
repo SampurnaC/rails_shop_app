@@ -1,9 +1,9 @@
-class ProductsController < ApplicationController
+class Dashboard::ProductsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_product, only: %i[show edit update destroy]
   def index
-    @products=Product.includes(:category)
+    @products=current_user.products.all
   end
 
   def show
@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
   def create
     @product=current_user.products.build(product_params)
     if @product.save
-      redirect_to @product, notice: "Product submitted for review"
+      redirect_to dashboard_product_path(@product), notice: "Product submitted for review"
     else
       render :new, status: :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
-      redirect_to @product, notice: "Product successfully updated"
+      redirect_to dashboard_product_path(@product), notice: "Product successfully updated"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -41,11 +41,10 @@ class ProductsController < ApplicationController
   private
   
   def set_product
-    binding.pry
     @product=Product.find(params[:id])
   end
   def product_params
-    params.require(:title, :description, :price, :status)
+    params.require(:product).permit(:title, :description, :price, :category_id, :image)
   end
 
 end

@@ -7,3 +7,16 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+["Electronics", "Home & Living", "Fashion", "Books", "Sports"].each do |category|
+  Category.create(name: category)
+end
+user=User.last
+100.times do
+  Product.create!(
+    title: "test",
+    description: "test description",
+    price: 100,
+    category: Category.first,
+    user: user
+  )
+end
