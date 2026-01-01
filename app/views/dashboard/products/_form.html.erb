@@ -6,7 +6,7 @@
         <div class="card-body">
           <h4 class="mb-4 text-center">New Product</h4>
 
-          <%= form_with model: [:dashboard, product], local: true do |f| %>
+          <%= form_with model: [:dashboard, product], local: true, html: {multipart: true} do |f| %>
 
             <% if product.errors.any? %>
               <div class="alert alert-danger">
@@ -53,6 +53,11 @@
                     :name,
                     { prompt: "Select a category" },
                     { class: "form-select" } %>
+            </div>
+            
+            <div class="mb-3">
+              <%= f.label :image, class: "form-label" %>
+              <%= f.file_field :image, class: "form-control" %>
             </div>
 
             <div class="d-grid">
