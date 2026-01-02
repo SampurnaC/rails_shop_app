@@ -65,3 +65,5 @@ end
 
 gem "devise", "~> 4.9"
 gem 'carrierwave', '~> 3.0'
+gem "pagy", "~> 6.0"
+gem "faker"
