@@ -1,0 +1,13 @@
+<%= turbo_stream.append :products do %>
+  <%= render partial: "product", collection: @products %>
+<% end %>
+
+<% if @pagy.next.present? %>
+  <%= turbo_stream.replace :next_page do %>
+    <%= turbo_frame_tag :next_page,
+          src: products_path(page: @pagy.next, format: :turbo_stream),
+          loading: :lazy do %>
+      <div class="text-center py-3 text-muted">Loading more…</div>
+    <% end %>
+  <% end %>
+<% end %>
