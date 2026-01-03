@@ -1,9 +1,15 @@
 class ProductsController < ApplicationController
+  include Pagy::Backend
 
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   before_action :set_product, only: %i[show edit update destroy]
   def index
-    @products=Product.includes(:category)
+    @pagy, @products=pagy_countless(Product.order(created_at: :desc), items: 10)
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def show
@@ -41,7 +47,6 @@ class ProductsController < ApplicationController
   private
   
   def set_product
-    binding.pry
     @product=Product.find(params[:id])
   end
   def product_params
