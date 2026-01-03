@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   # before_action :authenticate_user!
   before_action :set_product, only: %i[show edit update destroy]
   def index
-    @pagy, @products=pagy_countless(Product.order(created_at: :desc), items: 10)
+    @pagy, @products=pagy_countless(Product.includes(:category).order(created_at: :desc), items: 10)
 
     respond_to do |format|
       format.html
