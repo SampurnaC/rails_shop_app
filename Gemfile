@@ -49,6 +49,11 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+  gem "faker"
+  gem "rspec-rails"
+  gem "capybara"
+  gem "webdrivers"
+
 end
 
 group :development do
@@ -66,4 +71,3 @@ end
 gem "devise", "~> 4.9"
 gem 'carrierwave', '~> 3.0'
 gem "pagy", "~> 6.0"
-gem "faker"
