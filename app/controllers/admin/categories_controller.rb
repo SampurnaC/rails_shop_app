@@ -17,6 +17,8 @@ class Admin::CategoriesController < ApplicationController
     @category=Category.new(category_params)
     if @category.save
       redirect_to admin_category_path(@category), notice: "Category successfully created"
+      redirect_to [admin, @category], notice: "Category successfully created"
+
     else
       render :new, status: :unprocessable_entity
     end
