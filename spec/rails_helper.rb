@@ -8,6 +8,8 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 # that will avoid rails generators crashing because migrations haven't been run yet
 # return unless Rails.env.test?
 require 'rspec/rails'
+require 'simplecov'
+SimpleCov.start
 #require 'devise'
 #require 'devise/strategies/authenticatable'
 #Devise.warden_config.default_strategies(:scope => :user)
