@@ -3,5 +3,7 @@ FactoryBot.define do
     title {Faker::Lorem.word}
     description {Faker::Lorem.sentence}
     price {100}
+    association :user
+    association :category
   end
 end
