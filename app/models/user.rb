@@ -9,6 +9,8 @@ class User < ApplicationRecord
   after_initialize :set_default_role, if: :new_record?
 
   has_many :products
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_products, through: :favorites
 
   private
   def set_default_role
