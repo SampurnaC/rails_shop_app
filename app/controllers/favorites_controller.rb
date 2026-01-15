@@ -1,6 +1,10 @@
 class FavoritesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_product
+  before_action :set_product, except: [:index]
+
+  def index
+    @products=current_user.favorite_products
+  end
 
   def create
     current_user.favorites.find_or_create_by(product: @product)

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     resource :favorite, only: [:create, :destroy]
   end
 
+  resources :favorites, only: [:index]
+  
   root "products#index"
 
   namespace :dashboard do
