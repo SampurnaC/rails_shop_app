@@ -1,0 +1,14 @@
+<div id="<%= dom_id(product) %>"</div>
+  <% if user_signed_in? %>
+    <% if favorited?(product) %>
+      <%= button_to "Remove from Favorites",
+          product_favorite_path(product), method: :delete,
+          data: {turbo_method: :delete}
+          %>
+    <% else %>
+      <%= button_to "Add to Favorites",
+          product_favorite_path(product), method: :post,
+          data: {turbo_method: :post} %>
+    <% end %>
+  <% end %>
+</div>

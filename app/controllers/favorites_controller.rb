@@ -8,13 +8,20 @@ class FavoritesController < ApplicationController
 
   def create
     current_user.favorites.find_or_create_by(product: @product)
-    redirect_to root_path
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to root_path }
+    end
   end
 
   def destroy
     favorite=current_user.favorites.find_by(product: @product)
-    favorite.destroy
-    redirect_to root_path
+    favorite&.destroy
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to root_path }
+    end
   end
 
   private
