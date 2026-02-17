@@ -14,8 +14,18 @@ class OrderItemsController < ApplicationController
       @order_item.save
     end
 
-    redirect_to cart_path, notice: "Added to cart"
+    redirect_to order_path, notice: "Added to cart"
   end
   
-  
+  def update
+    @cart=current_user.orders.find_by(status: "cart")
+    @order_item=@cart.order_items.find(params[:id])
+    @order_item.update(quantity: params[:quantity])
+
+    redirect_to cart_path, notice: "Cart Updated"
+
+  end
+
+
+
 end
