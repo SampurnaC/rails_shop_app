@@ -26,6 +26,12 @@ class OrderItemsController < ApplicationController
 
   end
 
+  def destroy
+    @cart=current_user.orders.find_by(status: "cart")
+    @order_item=@cart.order_items.find(params[:id])
+    @order_item.destroy
 
+    redirect_to cart_path, notice: "Cart Deleted"
+  end
 
 end
