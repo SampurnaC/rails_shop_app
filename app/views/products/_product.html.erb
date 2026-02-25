@@ -35,15 +35,20 @@
 
     <% if user_signed_in? %>
       <% if favorited?(product) %>
-        <%= button_to "Remove from Favorites",
-            product_favorite_path(product), method: :delete,
-            data: {turbo: false} %>
+        <%= button_to product_favorite_path(product),
+          method: :delete,
+          data: { turbo: false },
+          class: "favorite-btn" do %>
+            <i class="bi bi-heart-fill text-danger" style="font-size: 24px;"></i>
+        <% end %>
       <% else %>
-        <%= button_to "Add to Favorites",
-            product_favorite_path(product), method: :post,
-            data: {turbo: false} %>
+        <%= button_to product_favorite_path(product),
+        method: :post,
+        data: { turbo: false },
+        class: "favorite-btn" do %>
+          <i class="bi bi-heart" style="font-size: 24px;"></i>
+        <% end %>
       <% end %>
     <% end %>
-    
   </div>
 </div>
