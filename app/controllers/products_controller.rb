@@ -4,7 +4,12 @@ class ProductsController < ApplicationController
   # before_action :authenticate_user!
   before_action :set_product, only: %i[show edit update destroy]
   def index
-    @pagy, @products=pagy_countless(Product.includes(:category).order(created_at: :desc), items: 10)
+    @products = Product.includes(:category).order(created_at: :desc)
+    if params[:query].present?
+      @products=@products.where("title ILIKE ?", "%#{params[:query]}%")
+    end
+
+    @pagy, @products=pagy_countless(@products, items: 10)
 
     respond_to do |format|
       format.html
