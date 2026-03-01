@@ -6,6 +6,7 @@ class Product < ApplicationRecord
   has_many :favorited_by_users, through: :favorites
 
   has_many :order_items
+  has_many :orders, through: :order_items
 
   validates :title, :price, presence: true
 end
