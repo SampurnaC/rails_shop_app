@@ -9,6 +9,13 @@ Rails.application.routes.draw do
 
   resources :favorites, only: [:index]
   
+  resource :order, only: [:show]
+  resources :order_items, only: [:create, :update,:destroy]
+
+  resources :orders, only: [:show] do
+    post :checkout
+  end
+
   root "products#index"
 
   namespace :dashboard do

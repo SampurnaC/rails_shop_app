@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorite_products, through: :favorites, source: :product
 
+  has_many :orders
+
   private
   def set_default_role
     self.role ||= :user

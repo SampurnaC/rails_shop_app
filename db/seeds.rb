@@ -11,12 +11,17 @@
   Category.create(name: category)
 end
 user=User.last
-100.times do
+
+image_paths = Dir[Rails.root.join("app/assets/images/placeholders/*")]
+
+
+200.times do
   Product.create!(
     title: "test",
     description: "test description",
-    price: 100,
+    price: 3,
     category: Category.first,
-    user: user
+    user: user,
+    image: File.open(image_paths.sample)
   )
 end

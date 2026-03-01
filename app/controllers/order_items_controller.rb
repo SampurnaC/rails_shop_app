@@ -1,0 +1,37 @@
+class OrderItemsController < ApplicationController
+  before_action :authenticate_user!
+
+  def create
+    cart=current_user.orders.find_or_create_by(status: "cart")
+    @product=Product.find(params[:product_id])
+    @order_item=cart.order_items.find_by(product: @product)
+
+    if @order_item
+      @order_item.quantity+=1
+      @order_item.save
+    else
+      @order_item=cart.order_items.build(product: @product, quantity: 1, price: @product.price)
+      @order_item.save
+    end
+
+    redirect_to order_path, notice: "Added to cart"
+  end
+  
+  def update
+    @cart=current_user.orders.find_by(status: "cart")
+    @order_item=@cart.order_items.find(params[:id])
+    @order_item.update(quantity: params[:quantity])
+
+    redirect_to cart_path, notice: "Cart Updated"
+
+  end
+
+  def destroy
+    @cart=current_user.orders.find_by(status: "cart")
+    @order_item=@cart.order_items.find(params[:id])
+    @order_item.destroy
+
+    redirect_to cart_path, notice: "Cart Deleted"
+  end
+
+end
