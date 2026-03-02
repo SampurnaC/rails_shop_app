@@ -53,7 +53,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "capybara"
   gem "webdrivers"
-  gem 'pry', '~> 0.15.0'
+  gem 'pry', '~> 0.16.0'
   gem 'factory_bot_rails'
 
 end
